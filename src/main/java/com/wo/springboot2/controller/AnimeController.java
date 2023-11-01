@@ -41,4 +41,19 @@ public class AnimeController {
         log.info("[finished] AnimeController - save");
         return new ResponseEntity<>(animeService.save(anime), HttpStatus.CREATED);
     }
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable long id) {
+        log.info("[start] AnimeController - save");
+        log.info("[finished] AnimeController - save");
+        animeService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> replace(@RequestBody Anime anime) {
+        log.info("[start] AnimeController - save");
+        log.info("[finished] AnimeController - save");
+        animeService.replace(anime);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
