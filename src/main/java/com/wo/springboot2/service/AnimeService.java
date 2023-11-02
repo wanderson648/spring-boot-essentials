@@ -6,6 +6,7 @@ import com.wo.springboot2.mapper.AnimeMapper;
 import com.wo.springboot2.repository.AnimeRepository;
 import com.wo.springboot2.requests.AnimePostRequestBody;
 import com.wo.springboot2.requests.AnimePutRequestBody;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,7 @@ public class AnimeService {
                 .orElseThrow(() -> new BadRequestException("Anime not found"));
     }
 
+    @Transactional
     public Anime save(AnimePostRequestBody animePostRequestBody) {
 //        Anime anime = AnimeMapper.INSTANCE.toAnime(animePostRequestBody);
         Anime anime = Anime.builder().name(animePostRequestBody.getName()).build();
