@@ -29,6 +29,7 @@ public class RestExceptionHandler {
                         .build(), HttpStatus.BAD_REQUEST);
 
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ValidationExceptionDetails> handlerMethodArgumentNotValidException(
             MethodArgumentNotValidException ex) {
@@ -48,4 +49,5 @@ public class RestExceptionHandler {
                         .fieldsMessage(fieldsMessage)
                         .build(), HttpStatus.BAD_REQUEST);
     }
+
 }
