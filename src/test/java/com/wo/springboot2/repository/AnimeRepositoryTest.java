@@ -1,6 +1,8 @@
 package com.wo.springboot2.repository;
 
 import com.wo.springboot2.domain.Anime;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.constraints.Max;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -75,6 +77,15 @@ class AnimeRepositoryTest {
     void findByName_ReturnsEmptyList_WhenAnimeIsNotFound() {
         List<Anime> animes = this.animeRepository.findByName("kakka");
         Assertions.assertThat(animes).isEmpty();
+    }
+
+    @Test
+    @DisplayName("Save throw ConstraintViolationException when name is empty")
+    void save_ThrowsConstraintViolationException_WhenNameIsEmpty() {
+        Anime anime = new Anime();
+
+        Assertions.assertThatThrownBy(() -> this.animeRepository.save(anime))
+                        .isInstanceOf(ConstraintViolationException.class);
     }
 
     private Anime createAnime() {
